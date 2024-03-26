@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflared-tunnel
+  namespace: kube-system
+spec:
+  replicas: 1 # You can adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: cloudflared-tunnel
+  template:
+    metadata:
+      labels:
+        app: cloudflared-tunnel
+    spec:
+      containers:
+      - name: cloudflared
+        image: cloudflare/cloudflared:latest
+        command: ["cloudflared", "tunnel", "--no-autoupdate", "run", "--token", ""]
+        # Add any additional container settings as needed
