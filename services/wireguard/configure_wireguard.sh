@@ -51,4 +51,4 @@ EOF
 cd /home/$username
 docker-compose up -d
 docker ps
-docker cp wireguard:/config/peer1/peer1.png peer1.png
+sudo docker cp wireguard:/config/peer1/peer1.png /home/$username/peer1.png
