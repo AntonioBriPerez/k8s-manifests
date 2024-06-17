@@ -1,5 +1,5 @@
 #!/bin/bash
-username=$1
+username=vagrant
 echo "Instalando Docker..."
 # Add Docker's official GPG key:
 sudo apt-get update -y
@@ -14,13 +14,13 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
-sudo apt-get install -u docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get install -y -u docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo docker run hello-world
 sudo groupadd docker
 sudo usermod -aG docker $username
 newgrp docker
 docker run hello-world
-cat <<EOF >/home/$username/docker-compose.yml
+cat <<EOF >/home/vagrant/docker-compose.yml
 version: '3.7'
 services:
   wireguard:
@@ -49,6 +49,6 @@ services:
     restart: unless-stopped
 EOF
 cd /home/$username
-docker-compose up -d
+docker compose up -d
 docker ps
-sudo docker cp wireguard:/config/peer1/peer1.png /home/$username/peer1.png
+sudo docker cp wireguard:/config/peer1/peer1.png /home/vagrant/peer1.png
