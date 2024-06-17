@@ -51,4 +51,6 @@ EOF
 cd /home/$username
 docker compose up -d
 docker ps
+sleep 10
+
 sudo docker cp wireguard:/config/peer1/peer1.png /home/vagrant/peer1.png
